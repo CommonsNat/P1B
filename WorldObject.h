@@ -1,3 +1,10 @@
+#ifndef WORLDOBJECT_H
+#define WORLDOBJECT_H
+
+#include <glm/glm.hpp>
+
+#include <vector>
+
 class WorldObject
 {
 public:
@@ -5,6 +12,8 @@ public:
     WorldObject(int icosphereRecursionLevelInput);
 
     ~WorldObject();
+
+    void Print();
 
 private:
 
@@ -36,9 +45,10 @@ private:
 
     struct IcosphereVertex
     {
+    	glm::ivec3 index;
         glm::vec3 modelCoord;
-        glm::vec3* pointerToCoord;
-    }
+        IcosphereVertex *pointerToCoord;
+    };
 
     //Triangle object keeps the indexes for its three points. Used in subdividing icosphere.
     struct Triangle
@@ -54,7 +64,10 @@ private:
     std::vector<Triangle> icosphereTriangles;
 
     const unsigned int icosphereRecursionLevel;
-    const unsigned int dimensionVertical, dimensionHoriztonal;
+    const unsigned int dimensionVertical;
+    const unsigned int dimensionHorizontal;
     const unsigned int icosphereResolution;
     const unsigned int panelSize;
-}
+};
+
+#endif
